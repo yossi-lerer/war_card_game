@@ -7,7 +7,6 @@ class Game:
     def __init__(self) -> None:
         self.first_player = Player
         self.second_player = Player
-        self.deck = []
 
     def create_deck(self):
         for symbol in ["♥", "♠", "♦", "♣"]:
@@ -41,7 +40,6 @@ class Game:
         first_player = self.first_player.cards.pop(0) # type: ignore
         second_player = self.second_player.cards.pop(0) # type: ignore
         Display.drawing_card(first_player, second_player, self.first_player, self.second_player)
-        msg = ""
         if first_player.num > second_player.num:
             self.first_player.cards.append(first_player) # type: ignore
             self.first_player.cards.append(second_player) # type: ignore
