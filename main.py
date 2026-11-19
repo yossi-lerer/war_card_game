@@ -23,10 +23,10 @@ class Game:
                 player.make_turn()
             if user_choose == 2:
                 Display.menu_in_exit()
-                user_choose = Display.user_input()
-                if user_choose == 1:
+                user_choose_scend = Display.user_input()
+                if user_choose_scend == 1:
                     self.run()
-                elif user_choose == 2:
+                elif user_choose_scend == 2:
                     break
 
     def run(self):
