@@ -1,39 +1,40 @@
 from classes.card import Card
-from classes.player import Player
+from classes.game_manager import GameManager
 from classes.display import Display
+from classes.player import player
 
 class Game:
-    def __init__(self, Player, Card) -> None:
-        self.Player = Player
+    def __init__(self, GameManager, Card) -> None:
+        self.GameManager = GameManager
         self.Card = Card
+
     
     def configuration(self):
         card = self.Card()
         card.create_deck()
         card.shuffling_cards()
         dealing_cards = card.dealing_cards()
-        player = self.Player(dealing_cards[0], dealing_cards[1])
-        return player
+        GameManager = self.GameManager(player("player", dealing_cards[0]), player("computer", dealing_cards[1]))
+        return GameManager
     
-    def durning_game(self, player):
+    def durning_game(self, GameManager):
         while True:
             Display.menu()
             user_choose = Display.user_input() 
             if user_choose == 1:
-                player.make_turn()
+                GameManager.make_turn()
             if user_choose == 2:
                 Display.menu_in_exit()
                 user_choose_menu_in_exit = Display.user_input()
                 if user_choose_menu_in_exit == 1:
-                    player = self.configuration()
-                    player.make_turn()
+                    GameManager = self.configuration()
+                    GameManager.make_turn()
                 elif user_choose_menu_in_exit == 2:
                     break
 
     def run(self):
-        player = self.configuration()
-        self.durning_game(player)
-
+        GameManager = self.configuration()
+        self.durning_game(GameManager)
 
 if __name__ == "__main__":
-    game = Game(Player, Card).run()
+    game = Game(GameManager, Card).run()

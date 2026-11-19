@@ -23,13 +23,13 @@ class Display:
         return int(user_choose)
     
     @staticmethod
-    def display_round_msg(player, computer, msg, player_cards, computer_cards):
+    def display_round_msg(player, computer, msg, first_player, second_player):
         print(f'''
         ========== TURN ==========
-        Player: {Display.convert_to_display(player)[0]} {Display.convert_to_display(player)[1]}
-        Computer: {Display.convert_to_display(computer)[0]} {Display.convert_to_display(computer)[1]}
+        {first_player.name}: {Display.convert_to_display(player)[0]} {Display.convert_to_display(player)[1]}
+        {second_player.name}: {Display.convert_to_display(computer)[0]} {Display.convert_to_display(computer)[1]}
         {msg}
-        Player cards: {len(player_cards)} | Computer cards: {len(computer_cards)}
+        {first_player.name} cards: {len(first_player.cards)} | {second_player.name} cards: {len(second_player.cards)}
         ==========================
         ''')
 
@@ -46,8 +46,8 @@ class Display:
         return card
 
     @staticmethod
-    def drawing_card(player_card, Computer_card):
+    def drawing_card(player_card, Computer_card, first_player, second_player):
         print(f'''
-        Player: {player_card[0]} {player_card[1]}
-        Computer: {Computer_card[0]} {Computer_card[1]}
+        {first_player.name}: {player_card[0]} {player_card[1]}
+        {second_player.name}: {Computer_card[0]} {Computer_card[1]}
         ''')
