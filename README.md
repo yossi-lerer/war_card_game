@@ -14,9 +14,16 @@ War game against the computer
 - Game Management
 - User interaction
 
+
 ### Tech Stack
 
-- **pythom**
+- **python**
+
+## Usage
+
+```bash
+python main.py
+```
 
 ## License
 
