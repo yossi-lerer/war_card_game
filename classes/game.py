@@ -1,12 +1,12 @@
 from classes.card import Card
-from classes.game_manager import GameManager
 from classes.display import Display
-from classes.player import player
+from classes.player import Player
 import random
 
 class Game:
-    def __init__(self, GameManager) -> None:
-        self.GameManager = GameManager
+    def __init__(self) -> None:
+        self.first_player = Player
+        self.second_player = Player
         self.deck = []
 
     def create_deck(self):
@@ -29,39 +29,55 @@ class Game:
     def dealing_cards(self):
         dealing = [[],[]]
         dealing_index = 0
-        
         for card in self.deck:
             dealing[dealing_index].append(card)
-
             if dealing_index == 0:
                 dealing_index = 1
             else:
                 dealing_index = 0
-        
         return dealing
+
+    def make_turn(self):
+        first_player = self.first_player.cards.pop(0) # type: ignore
+        second_player = self.second_player.cards.pop(0) # type: ignore
+        Display.drawing_card(first_player, second_player, self.first_player, self.second_player)
+        msg = ""
+        if first_player.num > second_player.num:
+            self.first_player.cards.append(first_player) # type: ignore
+            self.first_player.cards.append(second_player) # type: ignore
+            msg = f"{self.first_player.name} won the round!" # type: ignore
+        elif first_player.num < second_player.num:
+            self.second_player.cards.append(first_player) # type: ignore
+            self.second_player.cards.append(second_player) # type: ignore
+            msg = f"{self.second_player.name} won the round!" # type: ignore
+        else:
+            self.first_player.cards.append(first_player) # type: ignore
+            self.second_player.cards.append(second_player) # type: ignore
+            msg = "It's a draw!"
+        Display.display_round_msg(first_player, second_player, msg, self.first_player, self.second_player)
 
     def configuration(self):
         self.deck = []
         self.create_deck()
         self.shuffling_cards()
         dealing_cards = self.dealing_cards()
-        GameManager = self.GameManager(player("player", dealing_cards[0]), player("computer", dealing_cards[1]))
-        return GameManager
+        self.first_player = Player("player", dealing_cards[0])
+        self.second_player = Player("computer", dealing_cards[1])
     
-    def durning_game(self, GameManager):
+    def durning_game(self):
         while True:
             Display.menu()
             user_choose = Display.user_input() 
             if user_choose == 1:
-                GameManager.make_turn()
+                self.make_turn()
             if user_choose == 2:
                 Display.menu_in_exit()
                 user_choose_menu_in_exit = Display.user_input()
                 if user_choose_menu_in_exit == 1:
-                    GameManager = self.configuration()
+                    self.configuration()
                 elif user_choose_menu_in_exit == 2:
                     break
 
     def run(self):
-        GameManager = self.configuration()
-        self.durning_game(GameManager)
+        self.configuration()
+        self.durning_game()
