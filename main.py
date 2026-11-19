@@ -17,16 +17,20 @@ class Game:
     
     def durning_game(self, player):
         while True:
+
             Display.menu()
             user_choose = Display.user_input()
+            
             if user_choose == 1:
                 player.make_turn()
+
             if user_choose == 2:
                 Display.menu_in_exit()
-                user_choose_scend = Display.user_input()
-                if user_choose_scend == 1:
-                    self.run()
-                elif user_choose_scend == 2:
+                user_choose_menu_in_exit = Display.user_input()
+                if user_choose_menu_in_exit == 1:
+                    player = self.configuration()
+                    player.make_turn()
+                elif user_choose_menu_in_exit == 2:
                     break
 
     def run(self):
