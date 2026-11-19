@@ -17,13 +17,10 @@ class Game:
     
     def durning_game(self, player):
         while True:
-
             Display.menu()
-            user_choose = Display.user_input()
-            
+            user_choose = Display.user_input() 
             if user_choose == 1:
                 player.make_turn()
-
             if user_choose == 2:
                 Display.menu_in_exit()
                 user_choose_menu_in_exit = Display.user_input()
@@ -38,5 +35,5 @@ class Game:
         self.durning_game(player)
 
 
-game = Game(Player, Card)
-game.run()
+if __name__ == "__main__":
+    game = Game(Player, Card).run()
