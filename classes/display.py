@@ -34,20 +34,20 @@ class Display:
         ''')
 
     @staticmethod
-    def convert_to_display(card):
-        if card[0] == 11:
-            return ("J", card[1])
-        if card[0] == 12:
-            return ("Q", card[1])
-        if card[0] == 13:
-            return ("K", card[1])
-        if card[0] == 14:
-            return ("A", card[1])
-        return card
-
-    @staticmethod
     def drawing_card(player_card, Computer_card, first_player, second_player):
         print(f'''
-        {first_player.name}: {player_card[0]} {player_card[1]}
-        {second_player.name}: {Computer_card[0]} {Computer_card[1]}
+        {first_player.name}: {Display.convert_to_display(player_card)[0]} {Display.convert_to_display(player_card)[1]}
+        {second_player.name}: {Display.convert_to_display(Computer_card)[0]} {Display.convert_to_display(Computer_card)[1]}
         ''')
+
+    @staticmethod
+    def convert_to_display(card):
+        if card.num == 11:
+            return ("J", card.symbol)
+        if card.num == 12:
+            return ("Q", card.symbol)
+        if card.num == 13:
+            return ("K", card.symbol)
+        if card.num == 14:
+            return ("A", card.symbol)
+        return (card.num, card.symbol)

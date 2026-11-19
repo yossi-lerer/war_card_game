@@ -10,11 +10,11 @@ class GameManager:
         second_player = self.second_player.cards.pop(0)
         Display.drawing_card(first_player, second_player, self.first_player, self.second_player)
         msg = ""
-        if first_player[0] > second_player[0]:
+        if first_player.num > second_player.num:
             self.first_player.cards.append(first_player)
             self.first_player.cards.append(second_player)
             msg = f"{self.first_player.name} won the round!"
-        elif first_player[0] < second_player[0]:
+        elif first_player.num < second_player.num:
             self.second_player.cards.append(first_player)
             self.second_player.cards.append(second_player)
             msg = f"{self.second_player.name} won the round!"
